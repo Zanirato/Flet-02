@@ -7,6 +7,7 @@ def main(page: ft.Page):
     # Título da página e definição de padding
     page.title = "Calculadora de IMC"
     page.padding = ft.padding.only(top=40, left=20, right=20, bottom=20)
+    page.theme_mode = ft.ThemeMode.LIGHT  # Tema inicial claro
 
     # Campos de entrada, para adição de informações.
     # Variáveis globais peso e altura
@@ -60,40 +61,42 @@ def main(page: ft.Page):
         # Atualizar a página para mostrar o resultado
         page.update()
 
+    # Função para criar a AppBar com cores dinâmicas
+    def criar_appbar():
+        # Definir cor do texto com base no tema atual
+        cor_texto = ft.Colors.BLACK if page.theme_mode == ft.ThemeMode.LIGHT else ft.Colors.WHITE
+        # Retornar a AppBar configurada
+        return ft.AppBar(
+            leading=ft.Icon(ft.Icons.MULTILINE_CHART, color=cor_texto),
+            leading_width=40,
+            title=ft.Text("Calculadora IMC", color=cor_texto),
+            center_title=False,
+            bgcolor=ft.Colors.ON_SURFACE_VARIANT,
+            actions=[
+                ft.Row(
+                    # Ícones e switch para alternar tema
+                    controls=[
+                        ft.Text("☾", color=cor_texto),
+                        ft.Switch(value=(page.theme_mode == ft.ThemeMode.DARK), on_change=alternar_tema),
+                        ft.Text("𖤓", color=cor_texto),
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                )
+            ],
+        )
+    
     # Alternância entre tema claro e escuro
     def alternar_tema(e):
         page.theme_mode = (
             # Se o tema atual for claro, mude para escuro, e vice-versa
             ft.ThemeMode.DARK if page.theme_mode == ft.ThemeMode.LIGHT else ft.ThemeMode.LIGHT
         )
+        page.appbar = criar_appbar()  # Atualiza AppBar com as novas cores
         # Carregar na página o tema atualizado
         page.update()
 
-    # AppBar
-    page.appbar = ft.AppBar(
-        # Icone do app
-        leading=ft.Icon(ft.Icons.MULTILINE_CHART),
-        # Largura do ícone
-        leading_width=40,
-        # Título do app
-        title=ft.Text("Calculadora IMC"),
-        # Não centralizar o título
-        center_title=False,
-        # Cor de fundo da AppBar
-        bgcolor=ft.Colors.ON_SURFACE_VARIANT,
-        # Ações na AppBar (tema claro/escuro)
-        actions=[
-            # Linha com ícone, switch e ícone
-            ft.Row(
-                controls=[
-                    ft.Text("☾"),
-                    ft.Switch(value=False, on_change=alternar_tema),
-                    ft.Text("𖤓"),
-                ],
-                alignment=ft.MainAxisAlignment.CENTER,
-            )
-        ],
-    )
+   # Definir AppBar inicial
+    page.appbar = criar_appbar()
 
 
     # Função limpar
