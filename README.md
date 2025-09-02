@@ -30,8 +30,7 @@ O app também classifica o resultado em **baixo peso, peso normal, sobrepeso ou 
 
 * **Git/GitHub** → versionamento e hospedagem do repositório.
 
-
-<br> 
+---
 
 ## 💻 Comandos Utilizados no Terminal
 
@@ -52,7 +51,7 @@ pip show flet
 flet run --web nomeprojeto.py
 ```
 
-<br>
+---
 
 ## 🌆 Imagens da Tela
 <img width="751" height="877" alt="Captura de tela 2025-09-02 141134" src="https://github.com/user-attachments/assets/797584c3-f978-4c8f-acf6-5d407635fb12" />
