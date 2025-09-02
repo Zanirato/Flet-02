@@ -67,11 +67,17 @@ def main(page: ft.Page):
         cor_texto = ft.Colors.BLACK if page.theme_mode == ft.ThemeMode.LIGHT else ft.Colors.WHITE
         # Retornar a AppBar configurada
         return ft.AppBar(
+            # Ícone e título
             leading=ft.Icon(ft.Icons.MULTILINE_CHART, color=cor_texto),
+            # Configurações da AppBar
             leading_width=40,
+            # Título da AppBar
             title=ft.Text("Calculadora IMC", color=cor_texto),
+            # Configurações visuais
             center_title=False,
+            # Cores de fundo e ações
             bgcolor=ft.Colors.ON_SURFACE_VARIANT,
+            # Ações na AppBar
             actions=[
                 ft.Row(
                     # Ícones e switch para alternar tema
